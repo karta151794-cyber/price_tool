@@ -5,83 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>黑心小島人｜盲盒玩法定價工具</title>
   <style>
-    :root{--bg1:#fff7fb;--bg2:#f7fbff;--card:#ffffffd9;--text:#243042;--muted:#667085;--line:#e8eaf2;--green:#0f9d71;--green-bg:#eafaf3;--yellow:#b7791f;--yellow-bg:#fff7e6;--blue:#2563eb;--blue-bg:#eff6ff;--red:#dc2626;--red-bg:#fef2f2;--shadow:0 12px 36px rgba(30,41,59,.08);--radius:24px;--dark:#111827}
+    :root{
+      --bg1:#fffaf3;--bg2:#f7fbff;--card:#ffffffd9;--text:#243042;--muted:#667085;--line:#e8eaf2;
+      --green:#16a34a;--green-bg:#eefcf3;--yellow:#d97706;--yellow-bg:#fff7e8;--blue:#2563eb;--blue-bg:#eef4ff;
+      --red:#dc2626;--red-bg:#fef2f2;--brand:#46a3ff;--shadow:0 12px 36px rgba(30,41,59,.08);--radius:24px;
+      --dark1:#1d4ed8;--dark2:#3b82f6;
+    }
     *{box-sizing:border-box}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;color:var(--text);background:linear-gradient(135deg,var(--bg1),#fff,var(--bg2))}
-    .container{max-width:1260px;margin:0 auto;padding:24px}
-    .hero,.card{background:var(--card);border:1px solid #fff;backdrop-filter:blur(12px);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .hero{padding:28px;display:grid;grid-template-columns:1.5fr 1fr;gap:20px;margin-bottom:24px}
-    .hero h1{margin:6px 0 8px;font-size:34px;line-height:1.15}
-    .sub{color:var(--muted);line-height:1.7}
-    .pill{display:inline-flex;align-items:center;gap:8px;color:#d63384;font-size:14px;font-weight:800}
-    .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-self:start}
-    .stat{border-radius:20px;padding:18px;font-weight:700}
-    .stat small{display:block;color:var(--muted);margin-bottom:8px;font-weight:700}
-    .stat .value{font-size:32px;line-height:1}
-    .stat.low{background:#ecfdf5;border:1px solid #d1fae5}
-    .stat.high{background:#fff1f7;border:1px solid #ffd3e2}
+    .container{max-width:1320px;margin:0 auto;padding:24px}
+    .card,.hero{background:var(--card);border:1px solid #fff;border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(12px)}
+    .hero{padding:26px;display:grid;grid-template-columns:1.2fr 1fr;gap:22px;margin-bottom:24px}
+    .brand{font-size:29px;font-weight:800;color:var(--brand);margin-bottom:6px}
+    .hero h1{margin:0 0 10px;font-size:34px;line-height:1.15}
+    .sub{font-size:16px;color:var(--muted);line-height:1.7}
     .main{display:grid;grid-template-columns:390px 1fr;gap:24px}
     .card{padding:22px}
     .card h2{margin:0 0 6px;font-size:22px}
-    .card .desc{margin:0 0 18px;color:var(--muted);font-size:14px}
+    .desc{margin:0 0 18px;color:var(--muted);font-size:14px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .field{display:flex;flex-direction:column;gap:8px}
-    label{font-size:14px;color:#344054;font-weight:700}
+    label{font-size:14px;font-weight:700;color:#344054}
     input{width:100%;border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-size:16px;outline:none;background:#fff}
-    input:focus{border-color:#f472b6;box-shadow:0 0 0 4px rgba(244,114,182,.15)}
+    input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px rgba(70,163,255,.12)}
     hr{border:none;border-top:1px solid var(--line);margin:18px 0}
-    .section-title{margin:0 0 10px;font-size:15px;color:#475467;font-weight:800}
+    .section-title{margin:0 0 10px;font-size:15px;font-weight:800;color:#475467}
     .results{display:grid;grid-template-columns:1fr 1fr;gap:24px}
     .stack{display:grid;gap:12px}
     .result-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:#f8fafc}
-    .result-row .name{color:#475467;font-size:14px}
+    .result-row .name{font-size:14px;color:#475467}
     .result-row .num{font-size:22px;font-weight:800;white-space:nowrap}
-    .result-row.green{background:#ecfdf5;border-color:#d1fae5}
-    .result-row.pink{background:#fff1f7;border-color:#ffd3e2}
-    .result-row.blue{background:#eff6ff;border-color:#dbeafe}
-    .result-row.yellow{background:#fff7e6;border-color:#f7d9a6}
+    .result-row.blue{background:#eef6ff;border-color:#dbeafe}
+    .result-row.yellow{background:#fff9e9;border-color:#fde68a}
+    .decision{padding:20px 22px;border-radius:24px;background:linear-gradient(135deg,var(--dark1),var(--dark2));color:#fff;box-shadow:var(--shadow)}
+    .decision-title{font-size:24px;font-weight:800;margin-bottom:14px}
+    .decision-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    .decision-box{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px}
+    .decision-box .k{font-size:12px;color:#dbeafe}
+    .decision-box .v{margin-top:6px;font-size:24px;font-weight:900}
     .toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
     .toggle{display:inline-flex;background:#f8fafc;border:1px solid var(--line);padding:4px;border-radius:999px}
     .toggle button{border:none;background:transparent;padding:10px 16px;border-radius:999px;font-weight:800;color:#475467;cursor:pointer}
-    .toggle button.active{background:var(--dark);color:#fff}
-    .hint{font-size:14px;color:#475467;background:#f8fafc;border:1px solid var(--line);padding:12px 14px;border-radius:14px}
+    .toggle button.active{background:#111827;color:#fff}
     .table-wrap{overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#fff}
     table{width:100%;border-collapse:collapse}
     th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #f1f5f9;font-size:15px}
     th{background:#f8fafc;font-size:14px;color:#475467}
     tr.highlight{background:#fff1f7}
     .badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:13px;font-weight:800;border:1px solid transparent}
-    .safe{background:var(--green-bg);color:var(--green);border-color:#b7ebd1}
-    .warn{background:var(--yellow-bg);color:var(--yellow);border-color:#f7d9a6}
+    .safe{background:var(--green-bg);color:var(--green);border-color:#bbf7d0}
+    .warn{background:var(--yellow-bg);color:var(--yellow);border-color:#fde68a}
     .danger{background:var(--red-bg);color:var(--red);border-color:#fecaca}
-    .best{background:var(--green-bg);color:var(--green);border-color:#b7ebd1}
-    .balance{background:var(--yellow-bg);color:var(--yellow);border-color:#f7d9a6}
+    .great{background:var(--blue-bg);color:var(--blue);border-color:#bfdbfe}
+    .best{background:var(--green-bg);color:var(--green);border-color:#bbf7d0}
+    .balance{background:var(--yellow-bg);color:var(--yellow);border-color:#fde68a}
     .volume{background:var(--blue-bg);color:var(--blue);border-color:#bfdbfe}
-    .summary-cards{margin-top:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-    .mini{border:1px solid var(--line);border-radius:20px;padding:18px;background:#fff}
-    .mini .title{color:var(--muted);font-size:14px}
-    .mini .price{font-size:34px;font-weight:900;margin:10px 0 8px}
-    .decision{margin-top:24px;padding:20px 22px;border-radius:24px;background:linear-gradient(135deg,#1f2937,#0f172a);color:#fff;box-shadow:var(--shadow)}
-    .decision-title{font-size:20px;font-weight:800}
-    .decision-grid{margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-    .decision-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:14px}
-    .decision-box .k{font-size:12px;color:#cbd5e1}
-    .decision-box .v{margin-top:6px;font-size:24px;font-weight:900}
+    .summary-cards,.strategy-grid{margin-top:18px;display:grid;gap:14px}
+    .summary-cards{grid-template-columns:1fr 1fr 1fr}
+    .mini,.strategy-col{border:1px solid var(--line);border-radius:20px;padding:18px;background:#fff}
+    .mini .title,.strategy-col .title{color:var(--muted);font-size:14px}
+    .mini .price,.strategy-col .price{font-size:34px;font-weight:900;margin:10px 0 8px}
+    .strategy-grid{grid-template-columns:1fr 1fr}
+    .strategy-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #f1f5f9}
+    .strategy-row:last-child{border-bottom:none}
+    .strategy-diff,.status-note{margin-top:14px;font-size:14px;color:#475467;background:#f8fafc;border:1px solid var(--line);padding:12px 14px;border-radius:14px}
     .tiny{font-size:12px;color:var(--muted);line-height:1.6}
-    @media (max-width:980px){.hero,.main,.results,.summary-cards,.decision-grid{grid-template-columns:1fr}.hero h1{font-size:28px}.container{padding:16px}.toolbar{align-items:flex-start}}
+    .empty-safe{margin-top:14px;padding:14px 16px;border-radius:16px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-weight:700}
+    @media (max-width:980px){.hero,.main,.results,.decision-grid,.summary-cards,.strategy-grid{grid-template-columns:1fr}.container{padding:16px}.hero h1{font-size:30px}}
   </style>
 </head>
 <body>
   <div class="container">
     <section class="hero">
       <div>
-        <div class="pill">✨ 黑心小島人</div>
+        <div class="brand">✨ 黑心小島人</div>
         <h1>盲盒玩法定價工具</h1>
         <div class="sub">輸入成本、包數，快速掌握售價與整體利潤。</div>
       </div>
-      <div class="hero-stats">
-        <div class="stat low"><small>建議售價低</small><div class="value" id="heroLow">-</div></div>
-        <div class="stat high"><small>建議售價高</small><div class="value" id="heroHigh">-</div></div>
+      <div class="decision">
+        <div class="decision-title" id="decisionTitle">自訂價格決策</div>
+        <div class="decision-grid">
+          <div class="decision-box"><div class="k">單包利潤</div><div class="v" id="decisionPackProfit">-</div></div>
+          <div class="decision-box"><div class="k">整單利潤</div><div class="v" id="decisionOrderProfit">-</div></div>
+          <div class="decision-box"><div class="k">整箱總利潤</div><div class="v" id="decisionTotalProfit">-</div></div>
+          <div class="decision-box"><div class="k">回本包數</div><div class="v" id="decisionBreakEvenPacks">-</div></div>
+          <div class="decision-box"><div class="k">回本單數</div><div class="v" id="decisionBreakEvenOrders">-</div></div>
+          <div class="decision-box"><div class="k">當前模式</div><div class="v" id="decisionMode">-</div></div>
+        </div>
       </div>
     </section>
 
@@ -93,15 +103,15 @@
           <div class="field"><label>成本（RMB）</label><input id="costRmb" type="number" value="820"></div>
           <div class="field"><label>總包數</label><input id="totalPacks" type="number" value="90"></div>
           <div class="field"><label>匯率</label><input id="rate" type="number" step="0.01" value="4.5"></div>
-          <div class="field"><label>每單包數</label><input id="packsPerOrder" type="number" value="3"></div>
+          <div class="field"><label>每單包數</label><input id="packsPerOrder" type="number" value="5"></div>
           <div class="field"><label>蝦皮抽成 %</label><input id="feePercent" type="number" step="0.1" value="14"></div>
-          <div class="field"><label>額外補送包數</label><input id="extraGiftPacks" type="number" value="10"></div>
+          <div class="field"><label>額外補送包數</label><input id="extraGiftPacks" type="number" value="0"></div>
         </div>
         <hr>
         <div class="section-title">玩法機率</div>
         <div class="grid-2">
-          <div class="field"><label>實際卡位包數</label><input id="manualHitPacks" type="number" value="25"></div>
-          <div class="field"><label>固定機率 %</label><input id="fixedProb" type="number" step="0.1" value="23"></div>
+          <div class="field"><label>實際卡位包數</label><input id="manualHitPacks" type="number" value="0"></div>
+          <div class="field"><label>固定機率 %</label><input id="fixedProb" type="number" step="0.1" value="0"></div>
         </div>
         <p class="tiny">有填「實際卡位包數」就優先用實際值；沒填時才用固定機率反推。</p>
         <hr>
@@ -112,21 +122,21 @@
         </div>
         <hr>
         <div class="section-title">自訂測試價格</div>
-        <div class="field"><label>價格</label><input id="customPrice" type="number" value="699"></div>
+        <div class="field"><label>價格</label><input id="customPrice" type="number" value="920"></div>
       </div>
 
       <div>
         <div class="results">
           <div class="card">
             <h2>回推定價</h2>
-            <p class="desc">先抓你想要的利潤區間。</p>
+            <p class="desc">依照當前模式、手續費與目標利潤回推。</p>
             <div class="stack">
               <div class="result-row"><div class="name">無玩法單包成本</div><div class="num" id="basePackCost">-</div></div>
               <div class="result-row yellow"><div class="name">玩法後有效單包成本</div><div class="num" id="playPackCost">-</div></div>
               <div class="result-row"><div class="name">建議單包售價（低）</div><div class="num" id="recommendedPackLow">-</div></div>
               <div class="result-row"><div class="name">建議單包售價（高）</div><div class="num" id="recommendedPackHigh">-</div></div>
-              <div class="result-row green"><div class="name">建議每單售價（低）</div><div class="num" id="recommendedOrderLow">-</div></div>
-              <div class="result-row pink"><div class="name">建議每單售價（高）</div><div class="num" id="recommendedOrderHigh">-</div></div>
+              <div class="result-row blue"><div class="name">建議每單售價（低）</div><div class="num" id="recommendedOrderLow">-</div></div>
+              <div class="result-row blue"><div class="name">建議每單售價（高）</div><div class="num" id="recommendedOrderHigh">-</div></div>
             </div>
           </div>
 
@@ -148,119 +158,229 @@
           <div class="toolbar">
             <div>
               <h2 style="margin-bottom:6px;">價格測試</h2>
-              <div class="desc" style="margin:0;">可切換比較無玩法與玩法差異。</div>
+              <div class="desc" style="margin:0;">切換模式後，價格與利潤會一起重算。</div>
             </div>
             <div class="toggle">
               <button id="modeBaseBtn" class="active" type="button">無玩法</button>
               <button id="modePlayBtn" type="button">玩法</button>
             </div>
           </div>
-          <div id="modeHint" class="hint"></div>
+          <div class="status-note" id="modeNote"></div>
           <div id="customStatusBox" class="badge safe" style="margin:14px 0;"></div>
+          <div id="emptySafeBox" class="empty-safe" style="display:none;"></div>
           <div class="table-wrap">
             <table>
-              <thead>
-                <tr><th>價格</th><th>單包利潤</th><th>整單利潤</th><th>安全</th><th>分類</th></tr>
-              </thead>
+              <thead><tr><th>價格</th><th>單包利潤</th><th>整單利潤</th><th>安全</th><th>分類</th></tr></thead>
               <tbody id="priceTable"></tbody>
             </table>
           </div>
           <div class="summary-cards" id="summaryCards"></div>
         </div>
 
-        <div class="decision">
-          <div class="decision-title" id="decisionTitle">自訂價格決策</div>
-          <div class="decision-grid">
-            <div class="decision-box"><div class="k">單包利潤</div><div class="v" id="decisionPackProfit">-</div></div>
-            <div class="decision-box"><div class="k">整單利潤</div><div class="v" id="decisionOrderProfit">-</div></div>
-            <div class="decision-box"><div class="k">整箱總利潤</div><div class="v" id="decisionTotalProfit">-</div></div>
-            <div class="decision-box"><div class="k">回本包數</div><div class="v" id="decisionBreakEvenPacks">-</div></div>
-            <div class="decision-box"><div class="k">回本單數</div><div class="v" id="decisionBreakEvenOrders">-</div></div>
-            <div class="decision-box"><div class="k">當前模式</div><div class="v" id="decisionMode">-</div></div>
+        <div class="card" style="margin-top:24px;">
+          <h2>策略比較</h2>
+          <p class="desc">用兩個真實售價比較無玩法與玩法。</p>
+          <div class="grid-2">
+            <div class="field"><label>無玩法售價（每單）</label><input id="strategyBasePrice" type="number" value="920"></div>
+            <div class="field"><label>玩法售價（每單）</label><input id="strategyPlayPrice" type="number" value="1099"></div>
           </div>
+          <div class="strategy-grid">
+            <div class="strategy-col">
+              <div class="title">無玩法</div>
+              <div class="price" id="strategyBasePriceShow">-</div>
+              <div class="strategy-row"><span>單包利潤</span><strong id="strategyBasePackProfit">-</strong></div>
+              <div class="strategy-row"><span>整單利潤</span><strong id="strategyBaseOrderProfit">-</strong></div>
+              <div class="strategy-row"><span>整箱總利潤</span><strong id="strategyBaseTotalProfit">-</strong></div>
+              <div class="strategy-row"><span>回本單數</span><strong id="strategyBaseBreakEvenOrders">-</strong></div>
+            </div>
+            <div class="strategy-col">
+              <div class="title">玩法</div>
+              <div class="price" id="strategyPlayPriceShow">-</div>
+              <div class="strategy-row"><span>單包利潤</span><strong id="strategyPlayPackProfit">-</strong></div>
+              <div class="strategy-row"><span>整單利潤</span><strong id="strategyPlayOrderProfit">-</strong></div>
+              <div class="strategy-row"><span>整箱總利潤</span><strong id="strategyPlayTotalProfit">-</strong></div>
+              <div class="strategy-row"><span>回本單數</span><strong id="strategyPlayBreakEvenOrders">-</strong></div>
+            </div>
+          </div>
+          <div class="strategy-diff" id="strategyDiff"></div>
         </div>
       </div>
     </section>
   </div>
 
   <script>
-    const presetPrices=[599,649,699,749,799,899];
-    let mode="base";
-    const fmt=(n,d=1)=>!isFinite(n)?"-":Number(n).toLocaleString("zh-TW",{minimumFractionDigits:0,maximumFractionDigits:d});
-    const byId=(id)=>document.getElementById(id);
-    const ids=["costRmb","totalPacks","rate","packsPerOrder","feePercent","manualHitPacks","fixedProb","extraGiftPacks","targetProfitLow","targetProfitHigh","customPrice"];
-    const num=(id)=>{const v=parseFloat(byId(id).value);return Number.isFinite(v)?v:0};
-    function statusFromProfit(p){if(p<80)return{text:"危險",emoji:"❌",cls:"danger"};if(p<100)return{text:"偏低",emoji:"⚠",cls:"warn"};return{text:"安全",emoji:"✅",cls:"safe"}}
-    function roleFromProfit(p,profits){const max=Math.max(...profits),min=Math.min(...profits);if(p===max)return{text:"🟢 最佳",cls:"best"};if(p===min)return{text:"🔵 衝量",cls:"volume"};return{text:"🟡 平衡",cls:"balance"}}
-    function calc(){
-      const costRmb=num("costRmb"),totalPacks=num("totalPacks"),rate=num("rate"),packsPerOrder=num("packsPerOrder"),feePercent=num("feePercent"),manualHitPacks=num("manualHitPacks"),fixedProb=num("fixedProb"),extraGiftPacks=num("extraGiftPacks"),targetProfitLow=num("targetProfitLow"),targetProfitHigh=num("targetProfitHigh"),customPrice=num("customPrice");
-      const totalCost=costRmb*rate;
-      const basePackCost=totalPacks>0?totalCost/totalPacks:0;
-      const actualProb=totalPacks>0?(manualHitPacks/totalPacks)*100:0;
-      const fixedProbPacks=totalPacks*(fixedProb/100);
-      const usedHitPacks=manualHitPacks>0?manualHitPacks:fixedProbPacks;
-      const sellablePacks=Math.max(totalPacks-usedHitPacks-extraGiftPacks,0);
-      const sellableOrders=packsPerOrder>0?sellablePacks/packsPerOrder:0;
-      const playPackCost=sellablePacks>0?totalCost/sellablePacks:0;
-      const recommendedPackLow=basePackCost+targetProfitLow;
-      const recommendedPackHigh=basePackCost+targetProfitHigh;
-      const recommendedOrderLow=packsPerOrder>0?(recommendedPackLow*packsPerOrder)/(1-feePercent/100):0;
-      const recommendedOrderHigh=packsPerOrder>0?(recommendedPackHigh*packsPerOrder)/(1-feePercent/100):0;
-      const activeCost=mode==="play"?playPackCost:basePackCost;
-      const rows=[...presetPrices,customPrice].filter((v,i,arr)=>arr.indexOf(v)===i).sort((a,b)=>a-b).map(price=>{
-        const perPackProfit=packsPerOrder>0?(price*(1-feePercent/100))/packsPerOrder-activeCost:0;
-        return{price,perPackProfit,perOrderProfit:perPackProfit*packsPerOrder,totalBoxProfit:perPackProfit*(mode==="play"?sellablePacks:totalPacks),breakEvenPacks:perPackProfit>0?totalCost/perPackProfit:Infinity,breakEvenOrders:perPackProfit>0&&packsPerOrder>0?(totalCost/perPackProfit)/packsPerOrder:Infinity}
-      });
-      const customRow=rows.find(r=>r.price===customPrice)||{perPackProfit:0,perOrderProfit:0,totalBoxProfit:0,breakEvenPacks:Infinity,breakEvenOrders:Infinity};
-      const baseCustomPerPack=packsPerOrder>0?(customPrice*(1-feePercent/100))/packsPerOrder-basePackCost:0;
-      const playCustomPerPack=packsPerOrder>0?(customPrice*(1-feePercent/100))/packsPerOrder-playPackCost:0;
-      const diffVsBase=playCustomPerPack-baseCustomPerPack;
-      return{totalCost,basePackCost,playPackCost,actualProb,fixedProbPacks,usedHitPacks,sellablePacks,sellableOrders,recommendedPackLow,recommendedPackHigh,recommendedOrderLow,recommendedOrderHigh,rows,customRow,diffVsBase};
+    const presetPrices = [599,649,699,749,799,899,920,999,1099,1199,1299];
+    let mode = "base";
+    const byId = id => document.getElementById(id);
+    const num = id => { const v = parseFloat(byId(id).value); return Number.isFinite(v) ? v : 0; };
+    const fmt = (n,d=1) => !isFinite(n) ? "-" : Number(n).toLocaleString("zh-TW",{minimumFractionDigits:0,maximumFractionDigits:d});
+
+    function statusFromProfit(p, lowTarget, highTarget){
+      if (p < lowTarget * 0.8) return { text:"危險", emoji:"❌", cls:"danger" };
+      if (p < lowTarget) return { text:"偏低", emoji:"⚠", cls:"warn" };
+      if (p < highTarget) return { text:"安全", emoji:"✅", cls:"safe" };
+      return { text:"優秀", emoji:"🟢", cls:"great" };
     }
+
+    function roleBadge(role){
+      if (role === "衝量") return { text:"🔵 衝量", cls:"volume" };
+      if (role === "平衡") return { text:"🟡 平衡", cls:"balance" };
+      return { text:"🟢 最佳", cls:"best" };
+    }
+
+    function getRecommendedRows(rows, lowTarget){
+      const safeRows = rows.filter(r => r.perPackProfit >= lowTarget).sort((a,b)=>a.price-b.price);
+      if (safeRows.length === 0) return [];
+      if (safeRows.length === 1) return [{...safeRows[0], role:"最佳"}];
+      if (safeRows.length === 2) return [{...safeRows[0], role:"衝量"},{...safeRows[1], role:"最佳"}];
+      return [
+        {...safeRows[0], role:"衝量"},
+        {...safeRows[Math.floor(safeRows.length / 2)], role:"平衡"},
+        {...safeRows[safeRows.length - 1], role:"最佳"},
+      ];
+    }
+
+    function calcScenario(price, packsPerOrder, feePercent, costPerPack, totalCost, totalPacksForProfit){
+      const perPackRevenue = packsPerOrder > 0 ? (price * (1 - feePercent / 100)) / packsPerOrder : 0;
+      const perPackProfit = perPackRevenue - costPerPack;
+      const perOrderProfit = perPackProfit * packsPerOrder;
+      const totalProfit = perPackProfit * totalPacksForProfit;
+      const breakEvenPacks = perPackProfit > 0 ? totalCost / perPackProfit : Infinity;
+      const breakEvenOrders = (perPackProfit > 0 && packsPerOrder > 0) ? breakEvenPacks / packsPerOrder : Infinity;
+      return { perPackProfit, perOrderProfit, totalProfit, breakEvenPacks, breakEvenOrders };
+    }
+
+    function calc(){
+      const costRmb=num("costRmb"), totalPacks=num("totalPacks"), rate=num("rate"), packsPerOrder=num("packsPerOrder"),
+            feePercent=num("feePercent"), manualHitPacks=num("manualHitPacks"), fixedProb=num("fixedProb"),
+            extraGiftPacks=num("extraGiftPacks"), targetProfitLow=num("targetProfitLow"), targetProfitHigh=num("targetProfitHigh"),
+            customPrice=num("customPrice");
+
+      const totalCost = costRmb * rate;
+      const basePackCost = totalPacks > 0 ? totalCost / totalPacks : 0;
+      const actualProb = totalPacks > 0 ? (manualHitPacks / totalPacks) * 100 : 0;
+      const fixedProbPacks = totalPacks * (fixedProb / 100);
+      const usedHitPacks = manualHitPacks > 0 ? manualHitPacks : fixedProbPacks;
+      const sellablePacks = Math.max(totalPacks - usedHitPacks - extraGiftPacks, 0);
+      const sellableOrders = packsPerOrder > 0 ? sellablePacks / packsPerOrder : 0;
+      const playPackCost = sellablePacks > 0 ? totalCost / sellablePacks : 0;
+
+      const activeCost = mode === "play" ? playPackCost : basePackCost;
+      const activeTotalPacksForProfit = mode === "play" ? sellablePacks : totalPacks;
+
+      const recommendedPackLow = (activeCost + targetProfitLow) / (1 - feePercent / 100);
+      const recommendedPackHigh = (activeCost + targetProfitHigh) / (1 - feePercent / 100);
+      const recommendedOrderLow = recommendedPackLow * packsPerOrder;
+      const recommendedOrderHigh = recommendedPackHigh * packsPerOrder;
+
+      const rows = [...new Set([...presetPrices, customPrice])].sort((a,b)=>a-b).map(price => {
+        const result = calcScenario(price, packsPerOrder, feePercent, activeCost, totalCost, activeTotalPacksForProfit);
+        return { price, ...result };
+      });
+
+      const customRow = rows.find(r => r.price === customPrice) || { perPackProfit:0, perOrderProfit:0, totalProfit:0, breakEvenPacks:Infinity, breakEvenOrders:Infinity };
+
+      return {
+        totalCost, basePackCost, playPackCost, actualProb, fixedProbPacks, usedHitPacks, sellablePacks, sellableOrders,
+        recommendedPackLow, recommendedPackHigh, recommendedOrderLow, recommendedOrderHigh,
+        rows, customRow, targetProfitLow, targetProfitHigh, packsPerOrder, feePercent, totalPacks
+      };
+    }
+
     function render(){
-      const c=calc();
-      byId("heroLow").textContent=fmt(c.recommendedOrderLow,0);
-      byId("heroHigh").textContent=fmt(c.recommendedOrderHigh,0);
-      byId("basePackCost").textContent=fmt(c.basePackCost);
-      byId("playPackCost").textContent=fmt(c.playPackCost);
-      byId("recommendedPackLow").textContent=fmt(c.recommendedPackLow);
-      byId("recommendedPackHigh").textContent=fmt(c.recommendedPackHigh);
-      byId("recommendedOrderLow").textContent=fmt(c.recommendedOrderLow,0);
-      byId("recommendedOrderHigh").textContent=fmt(c.recommendedOrderHigh,0);
-      byId("actualProb").textContent=fmt(c.actualProb)+"%";
-      byId("fixedProbPacks").textContent=fmt(c.fixedProbPacks);
-      byId("usedHitPacks").textContent=fmt(c.usedHitPacks);
-      byId("totalCost").textContent=fmt(c.totalCost,0);
-      byId("sellablePacks").textContent=fmt(c.sellablePacks);
-      byId("sellableOrders").textContent=fmt(c.sellableOrders);
-      const hint=byId("modeHint");
-      if(mode==="base"){hint.textContent="目前顯示：無玩法。成本以「總成本 ÷ 總包數」計算。"}
-      else{const diff=Math.abs(c.diffVsBase),verb=c.diffVsBase<=0?"少賺":"多賺";hint.textContent=`目前顯示：玩法。成本以「總成本 ÷ 可賣包數」計算。與無玩法相比，自訂價格每包約${verb} ${fmt(diff)} 元。`}
-      const profits=c.rows.map(r=>r.perPackProfit);
-      const tbody=byId("priceTable");tbody.innerHTML="";
-      c.rows.forEach(row=>{
-        const s=statusFromProfit(row.perPackProfit),role=roleFromProfit(row.perPackProfit,profits);
-        const tr=document.createElement("tr");if(row.price===699)tr.className="highlight";
-        tr.innerHTML=`<td><strong>${row.price}</strong> ${row.price===699?'<span class="badge" style="background:#ffe4ef;color:#be185d;border-color:#fecdd3;margin-left:8px;">常用</span>':''}</td><td><strong>${fmt(row.perPackProfit)}</strong></td><td><strong>${fmt(row.perOrderProfit)}</strong></td><td><span class="badge ${s.cls}">${s.emoji} ${s.text}</span></td><td><span class="badge ${role.cls}">${role.text}</span></td>`;
+      const c = calc();
+      byId("basePackCost").textContent = fmt(c.basePackCost);
+      byId("playPackCost").textContent = fmt(c.playPackCost);
+      byId("recommendedPackLow").textContent = fmt(c.recommendedPackLow);
+      byId("recommendedPackHigh").textContent = fmt(c.recommendedPackHigh);
+      byId("recommendedOrderLow").textContent = fmt(c.recommendedOrderLow,0);
+      byId("recommendedOrderHigh").textContent = fmt(c.recommendedOrderHigh,0);
+      byId("actualProb").textContent = fmt(c.actualProb) + "%";
+      byId("fixedProbPacks").textContent = fmt(c.fixedProbPacks);
+      byId("usedHitPacks").textContent = fmt(c.usedHitPacks);
+      byId("totalCost").textContent = fmt(c.totalCost,0);
+      byId("sellablePacks").textContent = fmt(c.sellablePacks);
+      byId("sellableOrders").textContent = fmt(c.sellableOrders);
+
+      byId("decisionTitle").textContent = `自訂價格 ${num("customPrice")} 決策`;
+      byId("decisionPackProfit").textContent = fmt(c.customRow.perPackProfit);
+      byId("decisionOrderProfit").textContent = fmt(c.customRow.perOrderProfit);
+      byId("decisionTotalProfit").textContent = fmt(c.customRow.totalProfit,0);
+      byId("decisionBreakEvenPacks").textContent = c.customRow.breakEvenPacks === Infinity ? "-" : fmt(c.customRow.breakEvenPacks);
+      byId("decisionBreakEvenOrders").textContent = c.customRow.breakEvenOrders === Infinity ? "-" : fmt(c.customRow.breakEvenOrders);
+      byId("decisionMode").textContent = mode === "base" ? "無玩法" : "玩法";
+
+      byId("modeNote").textContent = mode === "base"
+        ? "目前顯示：無玩法。價格分類只會挑出達到你低目標利潤的價格。"
+        : "目前顯示：玩法。價格分類只會挑出達到你低目標利潤的價格。";
+
+      const customStatus = statusFromProfit(c.customRow.perPackProfit, c.targetProfitLow, c.targetProfitHigh);
+      const customBox = byId("customStatusBox");
+      customBox.className = `badge ${customStatus.cls}`;
+      customBox.textContent = `自訂價格 ${num("customPrice")}｜${customStatus.emoji} ${customStatus.text}｜單包 ${fmt(c.customRow.perPackProfit)}｜整單 ${fmt(c.customRow.perOrderProfit)}`;
+
+      const recommendedRows = getRecommendedRows(c.rows, c.targetProfitLow);
+      const emptySafeBox = byId("emptySafeBox");
+      if (recommendedRows.length === 0) {
+        emptySafeBox.style.display = "block";
+        emptySafeBox.textContent = "❌ 無任何安全價格，建議提高售價。";
+      } else {
+        emptySafeBox.style.display = "none";
+      }
+
+      const roleMap = new Map(recommendedRows.map(r => [r.price, r.role]));
+      const tbody = byId("priceTable");
+      tbody.innerHTML = "";
+      c.rows.forEach(row => {
+        const s = statusFromProfit(row.perPackProfit, c.targetProfitLow, c.targetProfitHigh);
+        const role = roleMap.get(row.price);
+        const tr = document.createElement("tr");
+        if (row.price === 699) tr.className = "highlight";
+        tr.innerHTML = `<td><strong>${row.price}</strong> ${row.price===699?'<span class="badge" style="background:#ffe4ef;color:#be185d;border-color:#fecdd3;margin-left:8px;">常用</span>':''}</td><td><strong>${fmt(row.perPackProfit)}</strong></td><td><strong>${fmt(row.perOrderProfit)}</strong></td><td><span class="badge ${s.cls}">${s.emoji} ${s.text}</span></td><td>${role ? `<span class="badge ${roleBadge(role).cls}">${roleBadge(role).text}</span>` : "-"}</td>`;
         tbody.appendChild(tr);
       });
-      const customStatus=statusFromProfit(c.customRow.perPackProfit),box=byId("customStatusBox");
-      box.className=`badge ${customStatus.cls}`;
-      box.textContent=`自訂價格 ${num("customPrice")}｜${customStatus.emoji} ${customStatus.text}｜單包 ${fmt(c.customRow.perPackProfit)}｜整單 ${fmt(c.customRow.perOrderProfit)}`;
-      const sorted=[...c.rows].sort((a,b)=>a.perPackProfit-b.perPackProfit),volume=sorted[0],best=sorted[sorted.length-1],balance=sorted[Math.floor(sorted.length/2)];
-      byId("summaryCards").innerHTML=`<div class="mini"><div class="title">🔵 衝量價</div><div class="price">${volume.price}</div><div>單包利潤 ${fmt(volume.perPackProfit)}</div><div>整單利潤 ${fmt(volume.perOrderProfit)}</div></div><div class="mini"><div class="title">🟡 平衡價</div><div class="price">${balance.price}</div><div>單包利潤 ${fmt(balance.perPackProfit)}</div><div>整單利潤 ${fmt(balance.perOrderProfit)}</div></div><div class="mini"><div class="title">🟢 最佳價</div><div class="price">${best.price}</div><div>單包利潤 ${fmt(best.perPackProfit)}</div><div>整單利潤 ${fmt(best.perOrderProfit)}</div></div>`;
-      byId("decisionTitle").textContent=`自訂價格 ${num("customPrice")} 決策`;
-      byId("decisionPackProfit").textContent=fmt(c.customRow.perPackProfit);
-      byId("decisionOrderProfit").textContent=fmt(c.customRow.perOrderProfit);
-      byId("decisionTotalProfit").textContent=fmt(c.customRow.totalBoxProfit,0);
-      byId("decisionBreakEvenPacks").textContent=c.customRow.breakEvenPacks===Infinity?"-":fmt(c.customRow.breakEvenPacks);
-      byId("decisionBreakEvenOrders").textContent=c.customRow.breakEvenOrders===Infinity?"-":fmt(c.customRow.breakEvenOrders);
-      byId("decisionMode").textContent=mode==="base"?"無玩法":"玩法";
+
+      const summary = byId("summaryCards");
+      summary.innerHTML = recommendedRows.map(r => {
+        const rb = roleBadge(r.role);
+        return `<div class="mini"><div class="title">${rb.text}</div><div class="price">${r.price}</div><div>單包利潤 ${fmt(r.perPackProfit)}</div><div>整單利潤 ${fmt(r.perOrderProfit)}</div></div>`;
+      }).join("");
+
+      const basePrice = num("strategyBasePrice"), playPrice = num("strategyPlayPrice");
+      const baseStrategy = calcScenario(basePrice, c.packsPerOrder, c.feePercent, c.basePackCost, c.totalCost, c.totalPacks);
+      const playStrategy = calcScenario(playPrice, c.packsPerOrder, c.feePercent, c.playPackCost, c.totalCost, c.sellablePacks);
+
+      byId("strategyBasePriceShow").textContent = fmt(basePrice,0);
+      byId("strategyPlayPriceShow").textContent = fmt(playPrice,0);
+      byId("strategyBasePackProfit").textContent = fmt(baseStrategy.perPackProfit);
+      byId("strategyBaseOrderProfit").textContent = fmt(baseStrategy.perOrderProfit);
+      byId("strategyBaseTotalProfit").textContent = fmt(baseStrategy.totalProfit,0);
+      byId("strategyBaseBreakEvenOrders").textContent = baseStrategy.breakEvenOrders === Infinity ? "-" : fmt(baseStrategy.breakEvenOrders);
+
+      byId("strategyPlayPackProfit").textContent = fmt(playStrategy.perPackProfit);
+      byId("strategyPlayOrderProfit").textContent = fmt(playStrategy.perOrderProfit);
+      byId("strategyPlayTotalProfit").textContent = fmt(playStrategy.totalProfit,0);
+      byId("strategyPlayBreakEvenOrders").textContent = playStrategy.breakEvenOrders === Infinity ? "-" : fmt(playStrategy.breakEvenOrders);
+
+      const diffPack = playStrategy.perPackProfit - baseStrategy.perPackProfit;
+      const diffOrder = playStrategy.perOrderProfit - baseStrategy.perOrderProfit;
+      const diffTotal = playStrategy.totalProfit - baseStrategy.totalProfit;
+      const packText = `${diffPack >= 0 ? "多賺" : "少賺"} ${fmt(Math.abs(diffPack))}`;
+      const orderText = `${diffOrder >= 0 ? "多賺" : "少賺"} ${fmt(Math.abs(diffOrder))}`;
+      const totalText = `${diffTotal >= 0 ? "多賺" : "少賺"} ${fmt(Math.abs(diffTotal),0)}`;
+      byId("strategyDiff").textContent = `玩法 vs 無玩法：單包${packText}、整單${orderText}、整箱${totalText}。`;
     }
-    function setMode(nextMode){mode=nextMode;byId("modeBaseBtn").classList.toggle("active",mode==="base");byId("modePlayBtn").classList.toggle("active",mode==="play");render()}
-    ids.forEach(id=>byId(id).addEventListener("input",render));
-    byId("modeBaseBtn").addEventListener("click",()=>setMode("base"));
-    byId("modePlayBtn").addEventListener("click",()=>setMode("play"));
+
+    function setMode(next){
+      mode = next;
+      byId("modeBaseBtn").classList.toggle("active", mode === "base");
+      byId("modePlayBtn").classList.toggle("active", mode === "play");
+      render();
+    }
+
+    ["costRmb","totalPacks","rate","packsPerOrder","feePercent","manualHitPacks","fixedProb","extraGiftPacks","targetProfitLow","targetProfitHigh","customPrice","strategyBasePrice","strategyPlayPrice"].forEach(id => byId(id).addEventListener("input", render));
+    byId("modeBaseBtn").addEventListener("click", () => setMode("base"));
+    byId("modePlayBtn").addEventListener("click", () => setMode("play"));
     render();
   </script>
 </body>
